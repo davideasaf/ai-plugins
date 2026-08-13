@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "engineering-weekly-newsletter",
+  "version": "0.1.0",
+  "description": "Research public engineering news and draft a concise, source-grounded weekly newsletter.",
+  "author": {
+    "name": "David Asaf"
+  },
+  "homepage": "https://github.com/davideasaf/ai-plugins/tree/main/plugins/engineering-weekly-newsletter",
+  "repository": "https://github.com/davideasaf/ai-plugins",
+  "license": "MIT",
+  "keywords": [
+    "engineering",
+    "newsletter",
+    "research",
+    "news",
+    "leadership"
+  ]
+}

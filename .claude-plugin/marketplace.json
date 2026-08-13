@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "ai-plugins",
+  "version": "0.1.0",
+  "description": "Evidence-grounded skills and plugins for AI-assisted research and publishing workflows.",
+  "owner": {
+    "name": "David Asaf"
+  },
+  "plugins": [
+    {
+      "name": "engineering-weekly-newsletter",
+      "source": "./plugins/engineering-weekly-newsletter",
+      "description": "Research public engineering news and draft a concise, source-grounded weekly newsletter.",
+      "category": "productivity"
+    }
+  ]
+}

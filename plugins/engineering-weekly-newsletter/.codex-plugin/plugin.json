@@ -1,0 +1,26 @@
+{
+  "name": "engineering-weekly-newsletter",
+  "version": "0.1.0",
+  "description": "Research public engineering news and draft a concise, source-grounded weekly newsletter.",
+  "author": {
+    "name": "David Asaf"
+  },
+  "homepage": "https://github.com/davideasaf/ai-plugins/tree/main/plugins/engineering-weekly-newsletter",
+  "repository": "https://github.com/davideasaf/ai-plugins",
+  "license": "MIT",
+  "keywords": ["engineering", "newsletter", "research", "news", "leadership"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Engineering Weekly Newsletter",
+    "shortDescription": "Source-grounded weekly engineering news",
+    "longDescription": "Research a bounded public-news window, qualify evidence and publication states, and draft a concise engineering newsletter with linked sources and a review checklist.",
+    "developerName": "David Asaf",
+    "category": "Productivity",
+    "capabilities": ["Research", "Write"],
+    "defaultPrompt": [
+      "Research this week's engineering news and draft a concise newsletter.",
+      "Create a developer-focused weekly brief from public sources.",
+      "Turn this source bundle into a review-ready engineering newsletter."
+    ]
+  }
+}

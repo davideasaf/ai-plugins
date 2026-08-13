@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engineering Weekly Newsletter"
+  short_description: "Source-grounded weekly engineering news"
+  default_prompt: "Use $engineering-weekly-newsletter to research and draft this week’s engineering news newsletter."
