@@ -13,13 +13,19 @@ Produce a review-ready Markdown newsletter from an explicit public-news window. 
 - Read [references/composition-rules.md](references/composition-rules.md) before drafting or revising prose.
 - Use [assets/newsletter-template.md](assets/newsletter-template.md) as an adaptable skeleton. Omit empty optional sections.
 
+## Optional companion
+
+- `$last30days` is an optional, separately installed skill for richer community and engagement research. It is not bundled with this plugin and must never be installed or updated without the user's explicit request.
+- When `$last30days` is available, prefer it for the community lane and follow its installed `SKILL.md` as the authority for setup, invocation, sources, and output handling.
+- When it is unavailable or unhealthy, continue with host public-web research and disclose degraded community coverage. The newsletter workflow must remain usable without it.
+
 ## Workflow
 
 1. Resolve an inclusive start date, end date, timezone, and generation time. Mark the end date as partial when research occurs before that day ends. If the user gives a window, use it exactly. Otherwise use the most recent seven calendar days through today and disclose that today is partial.
 2. Resolve audience, tone, topic scope, desired length, and output format from the request. Default to engineering leaders and senior practitioners, direct conversational prose, broad software-engineering coverage, a three-minute read, and Markdown.
 3. Inventory any user-supplied links, notes, exports, or source bundle. Treat private material as an optional local lane. Never send its paths or contents to public research tools unless the user explicitly authorizes that disclosure.
 4. Research the first-party, independent-context, and community lanes defined in the research reference. Search every default editorial desk unless the user narrows the scope.
-5. Prefer `$last30days` for the community lane when it is installed. Invoke it through the host and follow its complete current contract. For a weekly window, use a topic such as `engineering news, developer tools, software architecture, cloud infrastructure, reliability, security, open source, and engineering leadership`, pass the calendar-day distance as `--days=N`, add `--as-of=YYYY-MM-DD` for a historical or explicitly ended window, and use `--agent --register=dev`. Consume its sourced evidence and coverage status; do not copy its conversational wrapper into the newsletter.
+5. Prefer `$last30days` for the community lane when it is installed and healthy. Invoke it through the host and follow its complete current contract. For a weekly window, use a topic such as `engineering news, developer tools, software architecture, cloud infrastructure, reliability, security, open source, and engineering leadership`, pass the calendar-day distance as `--days=N`, add `--as-of=YYYY-MM-DD` for a historical or explicitly ended window, and use `--agent --register=dev`. Consume its sourced evidence and coverage status; do not copy its conversational wrapper into the newsletter.
 6. If `$last30days` is unavailable, continue with host web search across public community and practitioner sources. Mark the community lane degraded in the handoff. Do not imply that unavailable, rate-limited, or partial sources were quiet.
 7. Build a compact evidence ledger before drafting. Deduplicate by event, reconcile contradictions, require an in-window catalyst, and rank candidates using the research reference.
 8. Draft from supported claims only. Give each lead story `What changed`, `Why it matters`, and linked sources. Attribute community reaction and distinguish it from verification.

@@ -36,6 +36,30 @@ The plugin uses three evidence lanes:
 
 Community engagement is treated as attention rather than proof. If the optional `$last30days` skill is installed, the workflow prefers it for recent community research; otherwise it uses the host's available public-web research and discloses reduced coverage.
 
+### Optional `last30days` companion
+
+`last30days` is not packaged inside this plugin and is not a formal dependency. Users install and update it independently from its [upstream repository](https://github.com/mvanhorn/last30days-skill). The newsletter must not install it automatically.
+
+For Codex and other Agent Skills-compatible hosts:
+
+```bash
+npx skills add mvanhorn/last30days-skill -g -a codex
+npx skills update last30days -g
+```
+
+For Claude Code:
+
+```text
+/plugin marketplace add mvanhorn/last30days-skill
+/plugin install last30days
+```
+
+```bash
+claude plugin update last30days@last30days-skill
+```
+
+When the companion is absent, unavailable, rate-limited, or unhealthy, the workflow continues with host public-web research. It must describe community coverage as degraded rather than treating an unchecked source as quiet.
+
 ## 📦 Output contract
 
 Every review-ready newsletter includes:

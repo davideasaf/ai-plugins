@@ -21,6 +21,21 @@ jobs:
           python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
           python3 -m json.tool plugins/engineering-weekly-newsletter/.codex-plugin/plugin.json >/dev/null
           python3 -m json.tool plugins/engineering-weekly-newsletter/.claude-plugin/plugin.json >/dev/null
+      - name: Verify synchronized plugin versions
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          plugin_root = Path("plugins/engineering-weekly-newsletter")
+          paths = [
+              plugin_root / ".codex-plugin/plugin.json",
+              plugin_root / ".claude-plugin/plugin.json",
+          ]
+          versions = {path: json.loads(path.read_text())["version"] for path in paths}
+          assert len(set(versions.values())) == 1, versions
+          print(f"Plugin manifests agree on {next(iter(versions.values()))}")
+          PY
       - name: Run validator tests
         run: |
           python3 -m unittest discover \

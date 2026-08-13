@@ -1,6 +1,6 @@
 {
   "name": "engineering-weekly-newsletter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Research public engineering news and draft a concise, source-grounded weekly newsletter.",
   "author": {
     "name": "David Asaf"

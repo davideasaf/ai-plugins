@@ -16,7 +16,7 @@ Researches an explicit public-news window and produces a concise, review-ready e
 
 ## 🚀 Install
 
-These commands will work after this repository is published as `davideasaf/ai-plugins`.
+This repository is published as `davideasaf/ai-plugins`.
 
 ### 🤖 Codex and ChatGPT
 
@@ -44,6 +44,63 @@ Add the marketplace and install the plugin:
 ```
 
 For local testing, replace `davideasaf/ai-plugins` with the absolute path to this checkout.
+
+### 🗞️ Optional: richer community research
+
+The newsletter works without additional plugins. For broader Reddit, X, YouTube, Hacker News, GitHub, and other recent community signals, install the independently maintained [`last30days`](https://github.com/mvanhorn/last30days-skill) skill.
+
+It is intentionally **not bundled or auto-installed**. This avoids shipping a stale fork, keeps credentials and source setup under the user's control, and preserves a usable public-web fallback.
+
+For Codex and other Agent Skills hosts:
+
+```bash
+npx skills add mvanhorn/last30days-skill -g -a codex
+```
+
+For Claude Code:
+
+```text
+/plugin marketplace add mvanhorn/last30days-skill
+/plugin install last30days
+```
+
+| Community capability | With `last30days` | Without `last30days` |
+|---|---|---|
+| Recent practitioner signal | Multi-source skill coverage and engagement context | Host public-web search |
+| Newsletter generation | Full workflow | Full workflow |
+| Handoff | Reports actual source coverage | Marks community coverage as degraded |
+
+The newsletter treats engagement as attention rather than proof in either mode.
+
+## 🔄 Update
+
+Refresh the OpenAI marketplace snapshot:
+
+```bash
+codex plugin marketplace upgrade ai-plugins
+```
+
+Then restart the ChatGPT desktop app and reinstall or update **Engineering Weekly Newsletter** from the **AI Plugins** source so its cached installed copy is refreshed.
+
+Refresh and update in Claude Code:
+
+```text
+/plugin marketplace update ai-plugins
+```
+
+```bash
+claude plugin update engineering-weekly-newsletter@ai-plugins
+```
+
+Update the optional `last30days` companion separately:
+
+```bash
+npx skills update last30days -g
+```
+
+```bash
+claude plugin update last30days@last30days-skill
+```
 
 ## 🧠 Why two manifests?
 
@@ -90,6 +147,8 @@ claude plugin validate ./plugins/engineering-weekly-newsletter
 ```
 
 OpenAI authoring validation is run with the official `plugin-creator` and `skill-creator` tooling before release.
+
+Maintainers should follow the [release checklist](docs/releasing.md) so OpenAI and Claude metadata remain synchronized.
 
 ## 🔒 Safety and privacy
 
