@@ -2,7 +2,7 @@
 
 ![David Asaf plugs AI into a computer in a retro-futurist illustration](assets/ai-plugins-banner.png)
 
-Portable, evidence-grounded plugins for AI-assisted research and publishing workflows.
+Portable, evidence-grounded plugins for AI-assisted research, publishing, and typed decision workflows.
 
 This repository is a dual-format marketplace for OpenAI Codex/ChatGPT and Claude Code. Each ecosystem has its own thin manifest, while the Agent Skill workflow, references, scripts, templates, and examples remain single-source.
 
@@ -13,6 +13,12 @@ This repository is a dual-format marketplace for OpenAI Codex/ChatGPT and Claude
 Researches an explicit public-news window and produces a concise, review-ready engineering newsletter. It qualifies evidence, separates announcement from release and adoption, links claims to sources, excludes stale repetition, and surfaces unresolved claims instead of inventing certainty.
 
 [Read the plugin guide](docs/engineering-weekly-newsletter.md)
+
+### ⚖️ Jev via Vercel AI Gateway
+
+Uses TypeSafe AI's Jev as a fast typed decision function through Vercel AI Gateway. It supports Boolean classification, fixed choices, ordered scoring, shell pipelines, routing, guardrails, and application integrations while keeping policy thresholds and side effects in code.
+
+[Read the plugin guide](docs/jev-vercel-gateway.md)
 
 ## 🚀 Install
 
@@ -26,7 +32,7 @@ Add the marketplace from a terminal:
 codex plugin marketplace add davideasaf/ai-plugins
 ```
 
-Restart the ChatGPT desktop app, open the Plugins Directory, select **AI Plugins**, and install **Engineering Weekly Newsletter**.
+Restart the ChatGPT desktop app, open the Plugins Directory, select **AI Plugins**, and install the plugin you want.
 
 For local testing from this checkout:
 
@@ -41,6 +47,7 @@ Add the marketplace and install the plugin:
 ```text
 /plugin marketplace add davideasaf/ai-plugins
 /plugin install engineering-weekly-newsletter@ai-plugins
+/plugin install jev-vercel-gateway@ai-plugins
 ```
 
 For local testing, replace `davideasaf/ai-plugins` with the absolute path to this checkout.
@@ -80,7 +87,7 @@ Refresh the OpenAI marketplace snapshot:
 codex plugin marketplace upgrade ai-plugins
 ```
 
-Then restart the ChatGPT desktop app and reinstall or update **Engineering Weekly Newsletter** from the **AI Plugins** source so its cached installed copy is refreshed.
+Then restart the ChatGPT desktop app and reinstall or update the desired plugin from the **AI Plugins** source so its cached installed copy is refreshed.
 
 Refresh and update in Claude Code:
 
@@ -90,6 +97,7 @@ Refresh and update in Claude Code:
 
 ```bash
 claude plugin update engineering-weekly-newsletter@ai-plugins
+claude plugin update jev-vercel-gateway@ai-plugins
 ```
 
 Update the optional `last30days` companion separately:
@@ -122,10 +130,14 @@ ai-plugins/
 ├── .claude-plugin/marketplace.json
 ├── docs/
 ├── plugins/
-│   └── engineering-weekly-newsletter/
+│   ├── engineering-weekly-newsletter/
+│   │   ├── .codex-plugin/plugin.json
+│   │   ├── .claude-plugin/plugin.json
+│   │   └── skills/engineering-weekly-newsletter/
+│   └── jev-vercel-gateway/
 │       ├── .codex-plugin/plugin.json
 │       ├── .claude-plugin/plugin.json
-│       └── skills/engineering-weekly-newsletter/
+│       └── skills/jev-vercel-gateway/
 └── README.md
 ```
 
@@ -142,8 +154,17 @@ python3 \
   plugins/engineering-weekly-newsletter/skills/engineering-weekly-newsletter/examples/expected-newsletter.md \
   --strict
 
+uv run --with pyyaml python \
+  "${CODEX_HOME:-$HOME/.codex}/skills/.system/plugin-creator/scripts/validate_plugin.py" \
+  plugins/jev-vercel-gateway
+
+uv run --with pyyaml python \
+  "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" \
+  plugins/jev-vercel-gateway/skills/jev-vercel-gateway
+
 claude plugin validate .
 claude plugin validate ./plugins/engineering-weekly-newsletter
+claude plugin validate ./plugins/jev-vercel-gateway
 ```
 
 OpenAI authoring validation is run with the official `plugin-creator` and `skill-creator` tooling before release.
@@ -153,6 +174,8 @@ Maintainers should follow the [release checklist](docs/releasing.md) so OpenAI a
 ## 🔒 Safety and privacy
 
 The newsletter plugin researches public information by default. User-provided private material stays a separate local evidence lane and must not be sent to public research tools without explicit authorization. The plugin never sends, publishes, schedules, subscribes, posts, or mutates external systems without authorization for that exact action.
+
+The Jev plugin calls a remote, metered model through Vercel AI Gateway. It requires explicit authorization before sending private, proprietary, or regulated material, keeps `AI_GATEWAY_API_KEY` out of prompts and files, and leaves thresholds and business side effects in deterministic application code.
 
 ## 📄 License
 

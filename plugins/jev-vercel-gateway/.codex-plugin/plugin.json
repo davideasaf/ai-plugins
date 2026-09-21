@@ -1,0 +1,26 @@
+{
+  "name": "jev-vercel-gateway",
+  "version": "0.1.0",
+  "description": "Use TypeSafe AI's Jev through Vercel AI Gateway for fast typed decisions.",
+  "author": {
+    "name": "David Asaf"
+  },
+  "homepage": "https://github.com/davideasaf/ai-plugins/tree/main/plugins/jev-vercel-gateway",
+  "repository": "https://github.com/davideasaf/ai-plugins",
+  "license": "MIT",
+  "keywords": ["jev", "vercel", "ai-gateway", "classification", "evaluation"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Jev via Vercel AI Gateway",
+    "shortDescription": "Fast typed decisions with Jev",
+    "longDescription": "Evaluate text or JSON with Jev's Boolean, Choice, and Score decisions through Vercel AI Gateway, from shell pipelines or application code.",
+    "developerName": "David Asaf",
+    "category": "Productivity",
+    "capabilities": ["Evaluate", "Automate"],
+    "defaultPrompt": [
+      "Use Jev to classify this input into fixed choices.",
+      "Add a typed Jev decision to this application.",
+      "Score this input against ordered criteria with Jev."
+    ]
+  }
+}

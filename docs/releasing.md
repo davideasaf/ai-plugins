@@ -5,9 +5,7 @@ Use this checklist for changes to plugin runtime instructions, bundled resources
 ## Versioning
 
 - Choose the next semantic version.
-- Set the same version in:
-  - `plugins/engineering-weekly-newsletter/.codex-plugin/plugin.json`
-  - `plugins/engineering-weekly-newsletter/.claude-plugin/plugin.json`
+- Set the same version in the changed plugin's `.codex-plugin/plugin.json` and `.claude-plugin/plugin.json` files.
 - Bump `.claude-plugin/marketplace.json` when its catalog or a listed plugin changes.
 - Never vendor or pin a copy of `last30days`; keep its installation and updates independent.
 
@@ -16,13 +14,23 @@ Use this checklist for changes to plugin runtime instructions, bundled resources
 Run from the repository root:
 
 ```bash
+PLUGIN_NAME=jev-vercel-gateway
+
 uv run --with pyyaml python \
   "${CODEX_HOME:-$HOME/.codex}/skills/.system/plugin-creator/scripts/validate_plugin.py" \
-  plugins/engineering-weekly-newsletter
+  "plugins/$PLUGIN_NAME"
 
 uv run --with pyyaml python \
   "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-creator/scripts/quick_validate.py" \
-  plugins/engineering-weekly-newsletter/skills/engineering-weekly-newsletter
+  "plugins/$PLUGIN_NAME/skills/$PLUGIN_NAME"
+
+claude plugin validate .
+claude plugin validate "./plugins/$PLUGIN_NAME"
+```
+
+Run any plugin-specific behavioral tests as well. For Engineering Weekly Newsletter:
+
+```bash
 
 python3 -m unittest discover \
   -s plugins/engineering-weekly-newsletter/skills/engineering-weekly-newsletter/tests
@@ -32,8 +40,6 @@ python3 \
   plugins/engineering-weekly-newsletter/skills/engineering-weekly-newsletter/examples/expected-newsletter.md \
   --strict
 
-claude plugin validate .
-claude plugin validate ./plugins/engineering-weekly-newsletter
 ```
 
 Confirm the two plugin manifests report the same version:
@@ -43,13 +49,17 @@ python3 - <<'PY'
 import json
 from pathlib import Path
 
-paths = [
-    Path("plugins/engineering-weekly-newsletter/.codex-plugin/plugin.json"),
-    Path("plugins/engineering-weekly-newsletter/.claude-plugin/plugin.json"),
-]
-versions = {path: json.loads(path.read_text())["version"] for path in paths}
-assert len(set(versions.values())) == 1, versions
-print(next(iter(versions.values())))
+for plugin_root in sorted(Path("plugins").iterdir()):
+    if not plugin_root.is_dir():
+        continue
+    paths = [
+        plugin_root / ".codex-plugin/plugin.json",
+        plugin_root / ".claude-plugin/plugin.json",
+    ]
+    assert all(path.is_file() for path in paths), paths
+    versions = {path: json.loads(path.read_text())["version"] for path in paths}
+    assert len(set(versions.values())) == 1, versions
+    print(plugin_root.name, next(iter(versions.values())))
 PY
 ```
 

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "jev-vercel-gateway",
+  "version": "0.1.0",
+  "description": "Use TypeSafe AI's Jev through Vercel AI Gateway for fast typed decisions.",
+  "author": {
+    "name": "David Asaf"
+  },
+  "homepage": "https://github.com/davideasaf/ai-plugins/tree/main/plugins/jev-vercel-gateway",
+  "repository": "https://github.com/davideasaf/ai-plugins",
+  "license": "MIT",
+  "keywords": [
+    "jev",
+    "vercel",
+    "ai-gateway",
+    "classification",
+    "evaluation"
+  ]
+}

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "ai-plugins",
-  "version": "0.1.1",
-  "description": "Evidence-grounded skills and plugins for AI-assisted research and publishing workflows.",
+  "version": "0.1.2",
+  "description": "Portable skills and plugins for AI-assisted research, publishing, and typed decision workflows.",
   "owner": {
     "name": "David Asaf"
   },
@@ -11,6 +11,12 @@
       "name": "engineering-weekly-newsletter",
       "source": "./plugins/engineering-weekly-newsletter",
       "description": "Research public engineering news and draft a concise, source-grounded weekly newsletter.",
+      "category": "productivity"
+    },
+    {
+      "name": "jev-vercel-gateway",
+      "source": "./plugins/jev-vercel-gateway",
+      "description": "Use TypeSafe AI's Jev through Vercel AI Gateway for fast typed decisions.",
       "category": "productivity"
     }
   ]

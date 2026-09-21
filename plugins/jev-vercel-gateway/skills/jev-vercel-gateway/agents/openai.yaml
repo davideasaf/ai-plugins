@@ -1,0 +1,4 @@
+interface:
+  display_name: "Jev via Vercel AI Gateway"
+  short_description: "Typed decisions with Jev through AI Gateway"
+  default_prompt: "Use $jev-vercel-gateway to evaluate this input with typed decisions."

@@ -19,22 +19,27 @@ jobs:
         run: |
           python3 -m json.tool .agents/plugins/marketplace.json >/dev/null
           python3 -m json.tool .claude-plugin/marketplace.json >/dev/null
-          python3 -m json.tool plugins/engineering-weekly-newsletter/.codex-plugin/plugin.json >/dev/null
-          python3 -m json.tool plugins/engineering-weekly-newsletter/.claude-plugin/plugin.json >/dev/null
+          find plugins -path '*/.codex-plugin/plugin.json' -print0 |
+            xargs -0 -n1 python3 -m json.tool >/dev/null
+          find plugins -path '*/.claude-plugin/plugin.json' -print0 |
+            xargs -0 -n1 python3 -m json.tool >/dev/null
       - name: Verify synchronized plugin versions
         run: |
           python3 - <<'PY'
           import json
           from pathlib import Path
 
-          plugin_root = Path("plugins/engineering-weekly-newsletter")
-          paths = [
-              plugin_root / ".codex-plugin/plugin.json",
-              plugin_root / ".claude-plugin/plugin.json",
-          ]
-          versions = {path: json.loads(path.read_text())["version"] for path in paths}
-          assert len(set(versions.values())) == 1, versions
-          print(f"Plugin manifests agree on {next(iter(versions.values()))}")
+          for plugin_root in sorted(Path("plugins").iterdir()):
+              if not plugin_root.is_dir():
+                  continue
+              paths = [
+                  plugin_root / ".codex-plugin/plugin.json",
+                  plugin_root / ".claude-plugin/plugin.json",
+              ]
+              assert all(path.is_file() for path in paths), paths
+              versions = {path: json.loads(path.read_text())["version"] for path in paths}
+              assert len(set(versions.values())) == 1, versions
+              print(f"{plugin_root.name}: {next(iter(versions.values()))}")
           PY
       - name: Run validator tests
         run: |
